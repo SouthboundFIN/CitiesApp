@@ -7,6 +7,8 @@ interface Props {
     children: ReactNode;
 };
 
+
+
 const CitiesProvider: React.FC<Props> = ({ children }) => {
     const [cities, setCities] = useState<City[]>(testData);
 
@@ -18,11 +20,13 @@ const CitiesProvider: React.FC<Props> = ({ children }) => {
                 allCities: cities,
 
                 addCity: (city: City) => {
-                    console.log(`addCity called with ${JSON.stringify(city)}`);
+                    //Adding a new city from user input in "AddCity.tsx"
+                    setCities((prevCities) => [...prevCities, city]);
                 },
 
                 addLocation: (city: string, location: Location) => {
-                    console.log(`addLocation called with ${JSON.stringify(city)}`);
+                    //TODO: Adding a new location from user input in "AddLocation.tsx"
+                    
                 },
             }}
         >
