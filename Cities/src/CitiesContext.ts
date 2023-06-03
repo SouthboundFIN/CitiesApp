@@ -3,8 +3,8 @@ import { City, Location } from "../App";
 
 const emptyCitiesContext: CitiesContext = {
     allCities: [],
-    addCity: (city: City) => {},
-    addLocation: (city: string, location: Location) => {},
+    addCity: (city: City) => { },
+    addLocation: (city: string, location: Location) => { },
 };
 
 const CitiesContext = React.createContext<CitiesContext>(emptyCitiesContext);

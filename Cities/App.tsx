@@ -37,7 +37,7 @@ export interface Location {
 export type RootStackParamList = {
   Home: { cities: City[], setCities: (cities: City[]) => void };
   AddCity: undefined;
-  Locations: {cityId: string };
+  Locations: { cityId: string };
   AddLocation: undefined;
   Info: undefined;
 };

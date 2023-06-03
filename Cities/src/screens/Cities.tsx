@@ -75,8 +75,8 @@ const Cities: React.FC<CitiesScreenProps> = (props) => {
                 keyExtractor={(item) => item.id}
                 ListEmptyComponent={() => (
                     <Text style={styles.emptyText}>No locations found for this city.</Text>
-                )}            
-                ></FlatList>
+                )}
+            ></FlatList>
         </SafeAreaView>
     );
 };
