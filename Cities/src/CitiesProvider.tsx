@@ -12,24 +12,32 @@ interface Props {
 const CitiesProvider: React.FC<Props> = ({ children }) => {
     const [cities, setCities] = useState<City[]>(testData);
 
-    console.log(`CitiesProvider: ${JSON.stringify(cities)}`);
+    const addCity = (city: City) => {
+        setCities((prevCities) => [...prevCities, city]);
+    };
+
+    const addLocation = (cityId: string, location: Location) => {
+        setCities((prevCities) => {
+            return prevCities.map((city) => {
+                if (city.id === cityId) {
+                    return {
+                        ...city,
+                        locations: [...city.locations, location],
+                    };
+                }
+                return city;
+            });
+        });
+    };
+
 
     return (
         <CitiesContext.Provider
             value={{
                 allCities: cities,
-
-                addCity: (city: City) => {
-                    //Adding a new city from user input in "AddCity.tsx"
-                    setCities((prevCities) => [...prevCities, city]);
-                },
-
-                addLocation: (city: string, location: Location) => {
-                    //TODO: Adding a new location from user input in "AddLocation.tsx"
-                    
-                },
-            }}
-        >
+                addCity,
+                addLocation,
+            }}>
             {children}
         </CitiesContext.Provider>
     );

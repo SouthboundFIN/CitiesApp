@@ -53,10 +53,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    city: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
     locationContainer: {
         paddingVertical: 10,
         marginHorizontal: 16,

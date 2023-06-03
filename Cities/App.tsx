@@ -24,20 +24,20 @@ import CitiesProvider from './src/CitiesProvider';
 export interface City {
   name: string,
   country: string,
-  id: string
-  locations?: Location[],
-}
+  id: string,
+  locations: Location[],
+};
 
 export interface Location {
   id: string,
   title: string,
-  details: string
-}
+  details: string,
+};
 
 export type RootStackParamList = {
   Home: { cities: City[], setCities: (cities: City[]) => void };
   AddCity: undefined;
-  Locations: undefined;
+  Locations: {cityId: string };
   AddLocation: undefined;
   Info: undefined;
 };
