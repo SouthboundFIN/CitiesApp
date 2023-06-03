@@ -10,7 +10,7 @@ const Info: React.FC = () => {
 
     return (
         <View>
-            <Text>Info</Text>
+            <Text>This app was created by Paavo Virtanen</Text>
         </View>
     );
 };

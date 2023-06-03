@@ -18,9 +18,10 @@ const CitiesProvider: React.FC<Props> = ({ children }) => {
     setCities((prevCities) => {
       return prevCities.map((city) => {
         if (city.id === cityId) {
+          const locations = city.locations || []; // Handle undefined locations array
           return {
             ...city,
-            locations: [...city.locations, location],
+            locations: [...locations, location],
           };
         }
         return city;
