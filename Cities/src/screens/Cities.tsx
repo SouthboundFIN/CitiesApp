@@ -30,7 +30,7 @@ const Cities: React.FC<CitiesScreenProps> = (props) => {
                     onPress={() => { navigateToInfo() }}
                     title="?"
                     color='#800000'
-                    
+
                 />
             ),
             headerRight: () => (
@@ -45,7 +45,7 @@ const Cities: React.FC<CitiesScreenProps> = (props) => {
 
     const navigateToLocations = (city: City) => {
         //console.log(`Navigating to: ${JSON.stringify(city)}`);
-        navigation.navigate('Locations');
+        navigation.navigate('Locations', { cityId: city.id });
     }
     const navigateToInfo = () => {
         //console.log(`Navigating to: ${JSON.stringify(city)}`);
@@ -63,7 +63,7 @@ const Cities: React.FC<CitiesScreenProps> = (props) => {
                 data={cities}
                 renderItem={({ item }) => (
                     <TouchableWithoutFeedback
-                        onPress={() => {navigateToLocations(item)}}
+                        onPress={() => { navigateToLocations(item) }}
                         key={item.id}
                     >
                         <View style={styles.cityContainer}>
@@ -73,8 +73,10 @@ const Cities: React.FC<CitiesScreenProps> = (props) => {
                     </TouchableWithoutFeedback>
                 )}
                 keyExtractor={(item) => item.id}
-                ListEmptyComponent={() => <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'red', alignSelf: 'center', paddingTop: 20 }}>List empty</Text>}
-            ></FlatList>
+                ListEmptyComponent={() => (
+                    <Text style={styles.emptyText}>No locations found for this city.</Text>
+                )}            
+                ></FlatList>
         </SafeAreaView>
     );
 };
@@ -92,6 +94,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 16,
         borderBottomWidth: 1,
         justifyContent: 'center',
+        borderBottomColor: '#ccc',
     },
     city: {
         fontSize: 20,
@@ -99,6 +102,13 @@ const styles = StyleSheet.create({
     },
     text: {
         margin: 10,
+    },
+    emptyText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: 'red',
+        textAlign: 'center',
+        marginTop: 20,
     },
 })
 

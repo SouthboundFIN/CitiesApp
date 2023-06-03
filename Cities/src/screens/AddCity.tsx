@@ -12,7 +12,7 @@ const AddCity: React.FC = () => {
 
   // Using curly brackets to extract the 'add' methods from CitiesContext.ts for direct access
   const { addCity } = useContext(CitiesContext);
-  const { addLocation } = useContext(CitiesContext); //TODO: Implement this method in the same style as the addCity method is implemented
+  
   const navigation = useNavigation();
 
   // Validate user input when pressing the "Add City" button
@@ -28,7 +28,7 @@ const AddCity: React.FC = () => {
 
       setCityName('');
       setCountryName('');
-      navigation.goBack(); // TODO: Here the program should navigate back to 'Home'
+      navigation.goBack();
     }
   };
 
