@@ -1,50 +1,3 @@
-' @startuml
-
-' skinparam component {
-'   BackgroundColor #FFFFFF
-'   BorderColor #000000
-'   ArrowColor #000000
-' }
-
-' !define SCREEN_SIZE 800x600
-
-' package "Screens" {
-'   [Cities] as cities
-'   [AddCity] as addCity
-'   [Locations] as locations
-'   [AddLocation] as addLocation
-'   [Info] as info
-' }
-
-' package "Context" {
-'   [CitiesContext] as citiesContext
-' }
-
-' package "Navigation" {
-'   [Stack.Navigator] as stackNavigator
-' }
-
-' package "Provider" {
-'   [CitiesProvider] as citiesProvider
-' }
-
-' [cities] --> [locations] : "navigateToLocations()"
-' [cities] --> [addCity] : "navigateToAddCity()"
-' [locations] --> [addLocation] : "navigateToAddLocation()"
-' [cities] --> [info] : "navigateToInfo()"
-' [addLocation] --> [citiesContext] : "addLocation()"
-' [addCity] --> [citiesContext] : "addCity()"
-' [citiesProvider] --> [citiesContext] : "provide cities"
-' [stackNavigator] --> [citiesProvider] : "accesses"
-' [stackNavigator] --> [cities] : "renders"
-' [stackNavigator] --> [addCity] : "renders"
-' [stackNavigator] --> [locations] : "renders"
-' [stackNavigator] --> [addLocation] : "renders"
-' [stackNavigator] --> [info] : "renders"
-
-
-' @enduml
-
 ' @startuml Cities
 
 ' skinparam component {
@@ -68,7 +21,6 @@
 ' }
 
 ' package "Navigation" {
-'   [NavigationContainer] as navigationContainer
 '   [StackNavigator] as stackNavigator
 ' }
 
@@ -76,112 +28,125 @@
 '   [CitiesProvider] as citiesProvider
 ' }
 
-' package "Test data" {
+' package "Test" {
 '   [TestData] as testData
 ' }
 
-' navigationContainer --> citiesProvider : Contains
-' citiesProvider --> stackNavigator : Contains
-
-' stackNavigator --> cities : Renders
-' stackNavigator --> addCity : Renders
-' stackNavigator --> locations : Renders
-' stackNavigator --> addLocation : Renders
-' stackNavigator --> info : Renders
-
-' stackNavigator --> citiesContext : Provides cities and setCities
-' cities --> citiesContext : Receives cities and setCities
-' addCity --> citiesContext : Receives cities and setCities
-
-' stackNavigator --> testData : Uses test data
+' [cities] --> [locations]
+' [cities] --> [addCity]
+' [locations] --> [addLocation]
+' [cities] --> [info]
+' [addLocation] --> [citiesContext]
+' [addCity] --> [citiesContext]
+' [citiesProvider] --> [citiesContext]
+' [stackNavigator] --> [citiesProvider]
+' [stackNavigator] --> [cities]
+' [stackNavigator] --> [addCity]
+' [stackNavigator] --> [locations]
+' [stackNavigator] --> [addLocation]
+' [stackNavigator] --> [info]
+' [testData] --> [citiesProvider]
 
 ' @enduml
 
 @startuml
 
-class App
-class TestData
-class CitiesContext
-class CitiesProvider
-class AddLocation
-class Locations
-class Cities
-class AddCity
+skinparam component {
+    BackgroundColor FloralWhite
+    BorderColor Black
+    ArrowColor #707070
+    ArrowThickness 1.5
+}
 
-App --> City
-App --> Location
-App --> RootStackParamList
-App --> CitiesProvider
-App --> NavigationContainer
-App --> createNativeStackNavigator
-App --> useState
-App --> useColorScheme
-App --> DarkTheme
-App --> DefaultTheme
-App --> StyleSheet
-App --> React
-App --> ReactNative
+package "App" {
+    [App] as app
+    [NavigationContainer] as navContainer
+    [CitiesProvider] as citiesProvider
+}
 
-TestData --> City
-TestData --> uuid
+package "Screen Components" {
+    [Cities] as citiesScreen
+    [AddCity] as addCityScreen
+    [Locations] as locationsScreen
+    [AddLocation] as addLocationScreen
+    [Info] as infoScreen
+}
 
-CitiesContext --> City
-CitiesContext --> Location
-CitiesContext --> React
-CitiesContext --> createContext
+package "Context" {
+    [CitiesContext] as citiesContext
+}
 
-CitiesProvider --> City
-CitiesProvider --> Location
-CitiesProvider --> React
-CitiesProvider --> testData
-CitiesProvider --> useState
+package "Test Data" {
+    [Test Cities] as testCities
+    [Test Locations] as testLocations
+}
 
-AddLocation --> useContext
-AddLocation --> useState
-AddLocation --> useNavigation
-AddLocation --> StyleSheet
-AddLocation --> React
-AddLocation --> TextInput
-AddLocation --> TouchableOpacity
-AddLocation --> SafeAreaView
-AddLocation --> NativeStackScreenProps
-AddLocation --> uuid
-AddLocation --> CitiesContext
-AddLocation --> RootStackParamList
+app --> navContainer : Manages navigation
+app --> citiesProvider : Accesses city data
+citiesProvider --> citiesContext : Provides city data
 
-Locations --> useEffect
-Locations --> Button
-Locations --> FlatList
-Locations --> StyleSheet
-Locations --> Text
-Locations --> View
-Locations --> NativeStackScreenProps
-Locations --> SafeAreaView
-Locations --> CitiesContext
-Locations --> RootStackParamList
+navContainer --> citiesScreen : Navigates to cities screen
+navContainer --> addCityScreen : Navigates to add city screen
+navContainer --> locationsScreen : Navigates to locations screen
+navContainer --> addLocationScreen : Navigates to add location screen
+navContainer --> infoScreen : Navigates to info screen
 
-Cities --> useEffect
-Cities --> Button
-Cities --> FlatList
-Cities --> StyleSheet
-Cities --> Text
-Cities --> TouchableWithoutFeedback
-Cities --> View
-Cities --> NativeStackScreenProps
-Cities --> SafeAreaView
-Cities --> CitiesContext
-Cities --> RootStackParamList
+citiesScreen --> citiesContext : Retrieves cities data
+citiesScreen --> testCities : Uses test cities data
+addCityScreen --> citiesContext : Adds new city
+locationsScreen --> citiesContext : Retrieves Locations in selected City
+locationsScreen --> testLocations : Uses test locations data
+addLocationScreen --> citiesContext : Adds new location
 
-AddCity --> useContext
-AddCity --> useState
-AddCity --> SafeAreaView
-AddCity --> StyleSheet
-AddCity --> Text
-AddCity --> TextInput
-AddCity --> TouchableOpacity
-AddCity --> useNavigation
-AddCity --> CitiesContext
-AddCity --> uuid
-AddCity --> City
+@enduml
+
+@startuml
+
+!define ArrowColor #707070
+
+skinparam component {
+    BackgroundColor FloralWhite
+    BorderColor Black
+    ArrowColor ArrowColor
+    ArrowThickness 1.5
+}
+
+package "App" {
+    [App] as app
+    [NavigationContainer] as navContainer
+    [CitiesProvider] as citiesProvider
+}
+
+package "Screen Components" {
+    [Cities] as citiesScreen
+    [AddCity] as addCityScreen
+    [Locations] as locationsScreen
+    [AddLocation] as addLocationScreen
+    [Info] as infoScreen
+}
+
+package "Context" {
+    [CitiesContext] as citiesContext
+}
+
+package "Test Data" {
+    [Test Cities] as testCities
+    [Test Locations] as testLocations
+}
+
+app --> navContainer : Manages navigation
+app --> citiesProvider : Accesses city data
+app --> citiesScreen : Displays cities screen
+app --> addCityScreen : Displays add city screen
+app --> locationsScreen : Displays locations screen
+app --> addLocationScreen : Displays add location screen
+app --> infoScreen : Displays info screen
+
+citiesScreen --> citiesContext : Retrieves cities data
+citiesScreen --> testCities : Uses test cities data
+addCityScreen --> citiesContext : Adds new city
+locationsScreen --> citiesContext : Retrieves selected city
+locationsScreen --> testLocations : Uses test locations data
+addLocationScreen --> citiesContext : Adds new location
 
 @enduml
