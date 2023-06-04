@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList, City } from '../../App';
+import { RootStackParamList } from '../../App';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import CitiesContext from '../CitiesContext';
 
