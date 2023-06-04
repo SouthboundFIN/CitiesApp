@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import CitiesContext from '../CitiesContext';
 import uuid from 'react-native-uuid';
-import { City, Location } from '../../App';
-import Cities from './Cities';
+import { City } from '../../App';
 
 const AddCity: React.FC = () => {
     const [cityName, setCityName] = useState('');

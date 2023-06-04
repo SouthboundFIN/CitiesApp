@@ -1,4 +1,4 @@
-import { City, Location } from "../App";
+import { City } from "../App";
 import uuid from 'react-native-uuid';
 
 const testTampere: City = {
