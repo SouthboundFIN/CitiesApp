@@ -1,0 +1,187 @@
+' @startuml
+
+' skinparam component {
+'   BackgroundColor #FFFFFF
+'   BorderColor #000000
+'   ArrowColor #000000
+' }
+
+' !define SCREEN_SIZE 800x600
+
+' package "Screens" {
+'   [Cities] as cities
+'   [AddCity] as addCity
+'   [Locations] as locations
+'   [AddLocation] as addLocation
+'   [Info] as info
+' }
+
+' package "Context" {
+'   [CitiesContext] as citiesContext
+' }
+
+' package "Navigation" {
+'   [Stack.Navigator] as stackNavigator
+' }
+
+' package "Provider" {
+'   [CitiesProvider] as citiesProvider
+' }
+
+' [cities] --> [locations] : "navigateToLocations()"
+' [cities] --> [addCity] : "navigateToAddCity()"
+' [locations] --> [addLocation] : "navigateToAddLocation()"
+' [cities] --> [info] : "navigateToInfo()"
+' [addLocation] --> [citiesContext] : "addLocation()"
+' [addCity] --> [citiesContext] : "addCity()"
+' [citiesProvider] --> [citiesContext] : "provide cities"
+' [stackNavigator] --> [citiesProvider] : "accesses"
+' [stackNavigator] --> [cities] : "renders"
+' [stackNavigator] --> [addCity] : "renders"
+' [stackNavigator] --> [locations] : "renders"
+' [stackNavigator] --> [addLocation] : "renders"
+' [stackNavigator] --> [info] : "renders"
+
+
+' @enduml
+
+' @startuml Cities
+
+' skinparam component {
+'   BackgroundColor #FFFFFF
+'   BorderColor #000000
+'   ArrowColor #000000
+' }
+
+' !define SCREEN_SIZE 800x600
+
+' package "Screens" {
+'   [Cities] as cities
+'   [AddCity] as addCity
+'   [Locations] as locations
+'   [AddLocation] as addLocation
+'   [Info] as info
+' }
+
+' package "Context" {
+'   [CitiesContext] as citiesContext
+' }
+
+' package "Navigation" {
+'   [NavigationContainer] as navigationContainer
+'   [StackNavigator] as stackNavigator
+' }
+
+' package "Provider" {
+'   [CitiesProvider] as citiesProvider
+' }
+
+' package "Test data" {
+'   [TestData] as testData
+' }
+
+' navigationContainer --> citiesProvider : Contains
+' citiesProvider --> stackNavigator : Contains
+
+' stackNavigator --> cities : Renders
+' stackNavigator --> addCity : Renders
+' stackNavigator --> locations : Renders
+' stackNavigator --> addLocation : Renders
+' stackNavigator --> info : Renders
+
+' stackNavigator --> citiesContext : Provides cities and setCities
+' cities --> citiesContext : Receives cities and setCities
+' addCity --> citiesContext : Receives cities and setCities
+
+' stackNavigator --> testData : Uses test data
+
+' @enduml
+
+@startuml
+
+class App
+class TestData
+class CitiesContext
+class CitiesProvider
+class AddLocation
+class Locations
+class Cities
+class AddCity
+
+App --> City
+App --> Location
+App --> RootStackParamList
+App --> CitiesProvider
+App --> NavigationContainer
+App --> createNativeStackNavigator
+App --> useState
+App --> useColorScheme
+App --> DarkTheme
+App --> DefaultTheme
+App --> StyleSheet
+App --> React
+App --> ReactNative
+
+TestData --> City
+TestData --> uuid
+
+CitiesContext --> City
+CitiesContext --> Location
+CitiesContext --> React
+CitiesContext --> createContext
+
+CitiesProvider --> City
+CitiesProvider --> Location
+CitiesProvider --> React
+CitiesProvider --> testData
+CitiesProvider --> useState
+
+AddLocation --> useContext
+AddLocation --> useState
+AddLocation --> useNavigation
+AddLocation --> StyleSheet
+AddLocation --> React
+AddLocation --> TextInput
+AddLocation --> TouchableOpacity
+AddLocation --> SafeAreaView
+AddLocation --> NativeStackScreenProps
+AddLocation --> uuid
+AddLocation --> CitiesContext
+AddLocation --> RootStackParamList
+
+Locations --> useEffect
+Locations --> Button
+Locations --> FlatList
+Locations --> StyleSheet
+Locations --> Text
+Locations --> View
+Locations --> NativeStackScreenProps
+Locations --> SafeAreaView
+Locations --> CitiesContext
+Locations --> RootStackParamList
+
+Cities --> useEffect
+Cities --> Button
+Cities --> FlatList
+Cities --> StyleSheet
+Cities --> Text
+Cities --> TouchableWithoutFeedback
+Cities --> View
+Cities --> NativeStackScreenProps
+Cities --> SafeAreaView
+Cities --> CitiesContext
+Cities --> RootStackParamList
+
+AddCity --> useContext
+AddCity --> useState
+AddCity --> SafeAreaView
+AddCity --> StyleSheet
+AddCity --> Text
+AddCity --> TextInput
+AddCity --> TouchableOpacity
+AddCity --> useNavigation
+AddCity --> CitiesContext
+AddCity --> uuid
+AddCity --> City
+
+@enduml
